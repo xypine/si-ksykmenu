@@ -24,42 +24,33 @@
 			});
 	});
 
-	import { Container } from '@svelteuidev/core';
-	import { Center } from '@svelteuidev/core';
-	import { Loader } from '@svelteuidev/core';
-	import { Text } from '@svelteuidev/core';
-	import { Code } from '@svelteuidev/core';
-	import { Divider } from '@svelteuidev/core';
-	import { Title } from '@svelteuidev/core';
+	import Card, { Content } from '@smui/card';
+	import LinearProgress from '@smui/linear-progress';
 </script>
 
 <main>
-	<Container>
+	<Card>
 		{#if !condensed}
-			<Title order={1}>Ruokalista</Title>
+			<h1>Ruokalista</h1>
 			{#if err}
-				<Text color="red">Virhe: {err}</Text>
+				<p color="red">Virhe: {err}</p>
 			{:else if data}
-				<Code block>{JSON.stringify(data, null, 2)}</Code>
+				<pre><code>{JSON.stringify(data, null, 2)}</code></pre>
 			{:else}
-				<Center>
-					<Loader />
-				</Center>
+				<LinearProgress indeterminate />
 			{/if}
 		{:else}
-			<Title order={3}>Ruokalista</Title>
-			<Divider variant="dashed" />
+			<h3>Ruokalista</h3>
+			<hr />
 			{#if err}
-				<Text color="red">Virhe: {err}</Text>
+				<p color="red">Virhe: {err}</p>
 			{:else if data}
-				<Code>{JSON.stringify(data.menu)}</Code>
+				<code>{JSON.stringify(data.menu)}</code>
 			{:else}
-				<Center>
-					<Loader />
-				</Center>
+				<LinearProgress indeterminate />
 			{/if}
 		{/if}
-	</Container>
+	</Card>
 </main>
 
 <style>
